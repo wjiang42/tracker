@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_01_123836) do
+ActiveRecord::Schema.define(version: 2023_08_23_205408) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", limit: 255, null: false
@@ -289,6 +289,16 @@ ActiveRecord::Schema.define(version: 2023_08_01_123836) do
     t.boolean "defunct", default: false, null: false
   end
 
+  create_table "member_qualifications", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "qualification_id", null: false
+    t.datetime "expires_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_member_qualifications_on_member_id"
+    t.index ["qualification_id"], name: "index_member_qualifications_on_qualification_id"
+  end
+
   create_table "members", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "namefirst", limit: 255, null: false
     t.string "namelast", limit: 255, null: false
@@ -335,6 +345,14 @@ ActiveRecord::Schema.define(version: 2023_08_01_123836) do
     t.boolean "defunct", default: false, null: false
   end
 
+  create_table "qualifications", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.string "key"
+    t.string "name"
+    t.boolean "defunct"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "super_tics", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "member_id"
     t.integer "day"
@@ -369,4 +387,6 @@ ActiveRecord::Schema.define(version: 2023_08_01_123836) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "member_qualifications", "members"
+  add_foreign_key "member_qualifications", "qualifications"
 end

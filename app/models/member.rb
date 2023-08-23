@@ -7,6 +7,8 @@ class Member < ApplicationRecord
   has_many :timecards, -> { distinct }, :through => :timecard_entries
   has_many :super_tics, -> { order(day: :asc) }, dependent: :destroy
   has_many :event_role_applications
+  has_many :member_qualifications
+  has_many :qualifications, through: :member_qualifications
   
   accepts_nested_attributes_for :super_tics, :allow_destroy => true
   
