@@ -1,0 +1,6 @@
+one:
+  event_id: 0
+  status: Contract
+  payment_type: Oracle
+  oracle_string: MyString
+  memo: tracker dev 
