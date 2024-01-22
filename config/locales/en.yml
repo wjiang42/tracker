@@ -53,8 +53,3 @@ en:
         call: "Call"
         show: "Show"
         strike: "Strike"
-  support:
-       array:
-         two_words_connector: ", "
-         last_word_connector: ", "
-  
